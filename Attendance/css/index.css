@@ -96,7 +96,7 @@ border-color: white;
 	border: 0px;
 	margin-top: 8px;
 }
-@media(max=width: 768px){
+@media(max-width:768px){
     .Main{
         flex-direction: column;
     }
