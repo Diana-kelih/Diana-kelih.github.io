@@ -12,7 +12,7 @@ btncreate.addEventListener('click', () =>{
   }else{
   	if (txtconpass == txtpass) {
   		let emailid = txtemail.replace(/\./g, "_dot_").replace(/@/g, "_at_")
-  		let status = "inactive"
+  		let status = "active"
   		let timenow = Date.now(); 
   		let role = "Admin"
   		firebase.auth().createUserWithEmailAndPassword(txtemail,txtpass)

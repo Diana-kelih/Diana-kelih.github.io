@@ -14,7 +14,7 @@
     <img src="assets/monica logo.png" alt="logo" width="20%">
   </div>
   <div class="user">
-    <label id=" lbusername">username</label>
+    <label id="lbusername">username</label>
   </div>
 </div>
 
@@ -23,10 +23,12 @@
   <button class="menu-toggle">☰</button>
   <nav class="nav">
     <a href="#">Dashboard</a>
-    <a href="#">Courses</a>
-    <a href="#">Students</a>
-    <a href="#">Reports</a>
-    <a href="#" onclick="logout()">logout</a>
+    <a href="courses.html">Courses</a>
+    <a href="students.html">Students</a>
+    <a href="admin.html">Admins</a>
+    <a href="gps.html">GPS</a>
+    <a href="reports.html">Reports</a>
+    <a href="#" onclick="logout()">Logout</a>
   </nav>
 </header>
 
@@ -35,49 +37,25 @@
 
   <!-- Cards -->
   <div class="cards-grid">
-    <div class="card"><h3>Students</h3><p class="stat-number">350</p></div>
-    <div class="card"><h3>Courses</h3><p class="stat-number">25</p></div>
-    <div class="card"><h3>Lecturers</h3><p class="stat-number">18</p></div>
-    <div class="card"><h3>Approvals</h3><p class="stat-number">7</p></div>
-  </div>
-
-  <!-- Table -->
-  <div class="card">
-    <h2>Manage Students</h2>
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr><th>ID</th><th>Name</th><th>Program</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>2026001</td><td>John Doe</td><td>IT</td><td>Active</td></tr>
-          <tr><td>2026002</td><td>Jane Smith</td><td>CS</td><td>Active</td></tr>
-          <tr><td>2026003</td><td>Michael Brown</td><td>SE</td><td>Suspended</td></tr>
-        </tbody>
-      </table>
+    <div class="card">
+      <h3>Total users</h3>
+      <p class="stat-number" id="lbtotalstudents">loading...</p>
+    </div>
+    <div class="card">
+      <h3>Courses</h3>
+      <p class="stat-number" id="lbtotalcourses">loading...</p>
+    </div>
+    <div class="card">
+      <h3>Lecturers</h3>
+      <p class="stat-number" id="lbtotallecturer">loading...</p>
+    </div>
+    <div class="card">
+      <h3>Approvals</h3>
+      <p class="stat-number" id="lbtotalapprovals">loading...</p>
     </div>
   </div>
 
-  <!-- Form -->
-  <div class="card">
-    <h2>Add Student</h2>
-    <form>
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" placeholder="Enter full name">
-      </div>
-      <div class="form-group">
-        <label>Program</label>
-        <input type="text" placeholder="Enter program">
-      </div>
-      <div class="form-group">
-        <label>Status</label>
-        <select><option>Active</option><option>Suspended</option></select>
-      </div>
-      <button type="submit" class="btn-primary">Add Student</button>
-    </form>
-  </div>
-
+ 
 </main>
 
 <!-- FOOTER -->
@@ -88,8 +66,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-auth.js"></script>
 <script src="js/config.js"></script>
-<script src="js/register.js"></script>
-
+<script src="js/dashboard.js"></script>
 <script>
   const menuToggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.nav');
@@ -97,15 +74,25 @@
     nav.classList.toggle('active');
     menuToggle.textContent = nav.classList.contains('active') ? "✖" : "☰";
   });
-let lbusername = document.getElementById("lbusername")
-auth.onAuthStateChanged((user) {
-    if (user){
-        lbusername.innerHTML=user.email
-    }else{
-        window.location.href="index.html"
-    }
-    })
 
+let lbusername = document.getElementById('lbusername')
+auth.onAuthStateChanged( function (user) {
+  if (user) {
+    lbusername.innerHTML= user.email
+  }else{
+    window.location.href ="index.html"
+  }
+})
+
+// Load total users count
+firebase.database().ref("userDetails").on("value", (snapshot) => {
+  let count = 0;
+  snapshot.forEach(() => count++);
+  document.getElementById('lbtotalstudents').innerHTML = count;
+  if (count == 10) {
+    alert("Total users have reached 10!");
+  }
+})
 </script>
 
 </body>
