@@ -29,6 +29,7 @@ header{
 .logo img {
     width: 100px;
     height: 100px;
+     border-radius: 50%;
 }
 nav {
     position: absolute;
@@ -120,7 +121,7 @@ footer {
     object-fit: contain;   /* keeps logo ratio clean */
     background: transparent;
     padding: 5px;
-    border-radius: 10px;
+     border-radius: 50%;
 }
 .auth-card input {
     width: 100%;
@@ -178,20 +179,106 @@ footer {
 .auth-links {
     margin-top: 15px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     font-size: 12px;
+    gap: 8px;
 }
+
 .auth-links a {
     color: #0f3d57;
     text-decoration: none;
     transition: 0.3s;
     font-weight: 500;
 }
+
 .auth-links a:hover {
     color: #00c2ff;
     text-decoration: underline;
 }
+/* Container */
+.auth-container {
+    background: #ffffff;
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    text-align: center;
+}
 
+/* Logo */
+.logo {
+    margin-bottom: 15px;
+}
+
+.logo img {
+    border-radius: 50%;
+}
+
+/* Heading */
+.auth-container h2 {
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+/* Inputs */
+.auth-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.auth-container input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 5px rgba(59,130,246,0.5);
+}
+
+/* Button */
+.auth-container button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+p {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.auth-container button:hover {
+    background: #2563eb;
+}
+
+/* Link text */
+.auth-container p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.auth-container a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.auth-container a:hover {
+    text-decoration: underline;
+}
 
 
