@@ -27,12 +27,12 @@ data: {
     datasets : [{
     label : 'System Users',
     data : [totalAdmins, totalStudents],
-    boarderWidth :1
+    borderWidth : 1
     }]
 },
 options :{
     responsive:true,
-    scale :{
+    scales :{
         y:{
             beginAtZero:true
         }
@@ -53,20 +53,20 @@ firebase.database ().ref("Courses").once("value",function (snapshot){
         let data = childSnapshot.val()
         if (data.Status == "active"){
             totalActiveCourses++
-
+        console.log(totalActiveCourses);
  }else{
 
       totalInactiveCourses++
-    
+      console.log(totalInactiveCourses);
     }
     });
-    
+
   //display total count
    drawPieChart()
 })
 
 function drawPieChart() {
-    const canvasforpiegraph = document.getElementById('mypiechart')
+    const canvasforpiechart = document.getElementById('mypiechart')
     new Chart(canvasforpiechart, {
 type : 'pie',
 data: {
@@ -74,21 +74,53 @@ data: {
     datasets : [{
     label : 'Courses',
     data : [totalActiveCourses, totalInactiveCourses],
-    boarderWidth :1
-    }]
-},
-options :{
-    responsive:true,
-    scale :{
-        y:{
-            beginAtZero:true
-        }
-    }
-}
-    
+     borderWidth : 1
+     }]
+ },
+ options :{
+     responsive:true
+ }
     })
 }
 
+let totalActiveAdmins = 0
+let totalInactiveAdmins = 0
+firebase.database().ref("userDetails").on("value", function(snapshot) {
+        let total = 0
+        snapshot.forEach(function(childSnapshot) {
+            let data = childSnapshot.val()
+            if (data.Role == "Admin"){
+                totalActiveAdmins++;
+                    console.log(totalActiveAdmins);
+ }else{
 
+      totalInactiveAdmins++;
+      console.log(totalInactiveAdmins);
+    }
+    
+    });
 
+  //display total count
+   drawHistogram()
+})
+
+function drawHistogram() {
+    const canvasforhistogram = document.getElementById('myhistogram')
+    new Chart(canvasforhistogram, {
+type : 'pie',
+data: {
+    labels : ['Active Admins', 'Inactive Admins'],
+    datasets : [{
+    label : 'Lecturers',
+    data : [totalActiveAdmins, totalInactiveAdmins],
+     borderWidth : 1
+     }]
+ },
+ options :{
+     responsive:true
+ }
+    })
+}
+
+  
 

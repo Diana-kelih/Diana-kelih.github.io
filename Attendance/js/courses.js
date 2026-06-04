@@ -101,7 +101,7 @@ function loadCourses() {
     console.error('tablebody element not found');
     return;
   }
-  firebase.database().ref("courses").on("value", (snapshot) => {
+  firebase.database().ref("Courses").on("value", (snapshot) => {
     tablebody.innerHTML = "";
     console.log("Loading courses...");
     snapshot.forEach((childSnapshot) => {
@@ -135,7 +135,7 @@ function loadInactiveCourses() {
     console.error('tablebodyinactive element not found');
     return;
   }
-  firebase.database().ref("courses").on("value", (snapshot) => {
+  firebase.database().ref("Courses").on("value", (snapshot) => {
     tablebodyinactive.innerHTML = "";
     snapshot.forEach((childSnapshot) => {
       let data = childSnapshot.val();

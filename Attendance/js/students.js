@@ -176,7 +176,7 @@ firebase.database ().ref("userDetails").once("value",function (snapshot){
         let data = childSnapshot.val()
         if (data.Role == "Student")
             total++;
-        
+        x
     });
 
     lbtotalstudents.innerHTML = total;
