@@ -1,5 +1,14 @@
 // Firebase auth is loaded globally from config.js
 const signupForm = document.getElementById("signupForm");
+const messageDiv = document.getElementById("message");
+
+function showMessage(text, type) {
+    messageDiv.textContent = text;
+    messageDiv.className = `message ${type}`;
+    if (type === "error" || type === "warning") {
+        messageDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+}
 
 if (signupForm) {
     signupForm.addEventListener("submit", (e) => {
@@ -15,7 +24,7 @@ if (signupForm) {
 
         // Validate inputs
         if (!email || !password || !confirmPassword) {
-            alert("Please fill in all fields!");
+            showMessage("Please fill in all fields!", "warning");
             submitBtn.disabled = false;
             submitBtn.textContent = "Sign Up";
             return;
@@ -23,14 +32,14 @@ if (signupForm) {
 
         // Check password match
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            showMessage("Passwords do not match!", "error");
             submitBtn.disabled = false;
             submitBtn.textContent = "Sign Up";
             return;
         }
 
         if (password.length < 6) {
-            alert("Password must be at least 6 characters!");
+            showMessage("Password must be at least 6 characters!", "warning");
             submitBtn.disabled = false;
             submitBtn.textContent = "Sign Up";
             return;
@@ -41,12 +50,13 @@ if (signupForm) {
             .then((userCredential) => {
                 // SUCCESS → redirect to login page
                 console.log("Account created:", userCredential.user.email);
+                showMessage("Account created successfully! Redirecting to sign in...", "success");
                 setTimeout(() => {
-                    window.location.replace("login.html");
-                }, 300);
+                    window.location.replace("signin.html");
+                }, 1500);
             })
             .catch((error) => {
-                alert("Error: " + error.message);
+                showMessage("Error: " + error.message, "error");
                 console.error(error);
                 submitBtn.disabled = false;
                 submitBtn.textContent = "Sign Up";

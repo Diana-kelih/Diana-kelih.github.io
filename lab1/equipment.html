@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Equipment Management</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+<!-- LOGO -->
+<div class="dashboard-logo">
+    <img src="images2/kelly.png" alt="logo">
+</div>
+
+<!-- NAVIGATION -->
+<ul class="nav">
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="borrow.html">Borrowing</a></li>
+    <li><a href="reports.html">Reports</a></li>
+</ul>
+
+<!-- PAGE TITLE -->
+<h2 style="text-align:center; margin-top:20px;">Equipment Management</h2>
+
+<!-- ADD EQUIPMENT FORM -->
+<div class="form-container">
+
+    <form id="equipmentForm">
+
+        <input type="text" id="name" placeholder="Equipment Name" required>
+
+        <input type="text" id="serialNumber" placeholder="Serial Number" required>
+
+        <button type="submit">Add Equipment</button>
+
+    </form>
+
+</div>
+
+<!-- EQUIPMENT LIST -->
+<div id="equipmentContainer" class="equipment-container"></div>
+
+<!-- SCRIPT -->
+<script src="equipment.js"></script>
+
+</body>
+</html>
