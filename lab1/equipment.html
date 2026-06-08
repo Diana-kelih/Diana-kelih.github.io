@@ -7,43 +7,55 @@
 </head>
 
 <body>
-
-<!-- LOGO -->
 <div class="dashboard-logo">
     <img src="images2/kelly.png" alt="logo">
 </div>
-
-<!-- NAVIGATION -->
 <ul class="nav">
-    <li><a href="dashboard.html">Dashboard</a></li>
-    <li><a href="equipment.html">Equipment</a></li>
-    <li><a href="borrow.html">Borrowing</a></li>
-    <li><a href="reports.html">Reports</a></li>
+  <li><a href="dashboard.html">Dashboard</a></li>
+  <li><a href="equipment.html">Equipment</a></li>
+  <li><a href="borrow.html">Borrow</a></li>
+  <li><a href="return.html">Return</a></li>
+  <li><a href="report.html">Report</a></li>
+  <li><a href="logout.html">Logout</a></li>
 </ul>
 
-<!-- PAGE TITLE -->
-<h2 style="text-align:center; margin-top:20px;">Equipment Management</h2>
+<h2 class="page-title">Equipment Management</h2>
 
-<!-- ADD EQUIPMENT FORM -->
-<div class="form-container">
+<div class="equipment-header">
 
-    <form id="equipmentForm">
+    <input
+        type="text"
+        id="searchEquipment"
+        placeholder="Search equipment..."
+    >
 
-        <input type="text" id="name" placeholder="Equipment Name" required>
-
-        <input type="text" id="serialNumber" placeholder="Serial Number" required>
-
-        <button type="submit">Add Equipment</button>
-
-    </form>
+    <button id="addEquipmentBtn">
+        + Add Equipment
+    </button>
 
 </div>
 
-<!-- EQUIPMENT LIST -->
-<div id="equipmentContainer" class="equipment-container"></div>
+<table class="equipment-table">
 
-<!-- SCRIPT -->
-<script src="equipment.js"></script>
+    <thead>
+        <tr>
+            <th>Equipment Name</th>
+            <th>Serial Number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody id="equipmentTableBody">
+    </tbody>
+
+</table>
+
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-database-compat.js"></script>
+<script src="js/config.js"></script>
+<script src="js/equipment.js"></script>
 
 </body>
 </html>

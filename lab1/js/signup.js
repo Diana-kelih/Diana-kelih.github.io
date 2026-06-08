@@ -1,4 +1,3 @@
-// Firebase auth is loaded globally from config.js
 const signupForm = document.getElementById("signupForm");
 const messageDiv = document.getElementById("message");
 

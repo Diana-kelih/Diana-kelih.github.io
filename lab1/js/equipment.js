@@ -1,139 +1,87 @@
-import { db } from "./firebase-config.js";
-import {
-    ref,
-    push,
-    onValue,
-    remove,
-    update
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+const equipmentRef = firebase.database().ref("equipment");
 
-const equipmentRef = ref(db, "equipment");
+const tableBody = document.getElementById("equipmentTableBody");
+function loadEquipment() {
 
+    equipmentRef.on('value', (snapshot) => {
 
-// ==========================
-// TOAST MESSAGE SYSTEM
-// ==========================
-function showMessage(msg, color = "#28a745") {
-    const box = document.createElement("div");
-
-    box.innerText = msg;
-    box.style.position = "fixed";
-    box.style.top = "20px";
-    box.style.right = "20px";
-    box.style.background = color;
-    box.style.color = "white";
-    box.style.padding = "12px 16px";
-    box.style.borderRadius = "8px";
-    box.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-    box.style.zIndex = "9999";
-    box.style.fontSize = "14px";
-
-    document.body.appendChild(box);
-
-    setTimeout(() => {
-        box.remove();
-    }, 2000);
-}
-
-
-// ==========================
-// ADD EQUIPMENT
-// ==========================
-export function addEquipment(name, serialNumber) {
-    push(equipmentRef, {
-        name: name,
-        serialNumber: serialNumber,
-        condition: "Available"
-    });
-
-    showMessage("✅ Equipment added successfully!");
-}
-
-
-// ==========================
-// RENDER REALTIME DATA
-// ==========================
-function renderEquipment() {
-    const container = document.getElementById("equipmentContainer");
-
-    onValue(equipmentRef, (snapshot) => {
-        container.innerHTML = "";
+        tableBody.innerHTML = "";
 
         const data = snapshot.val();
 
         if (!data) {
-            container.innerHTML = "<p>No equipment found</p>";
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="4">No equipment found</td>
+                </tr>
+            `;
             return;
         }
 
-        for (let id in data) {
-            const item = data[id];
+        Object.entries(data).forEach(([id, item]) => {
 
-            const card = document.createElement("div");
-            card.classList.add("equipment-card");
+            const status = item.status ? item.status.toLowerCase() : "available";
+            const statusClass = status === "borrowed" ? "status-borrowed" : "status-available";
+            const statusText = status === "borrowed" ? "Borrowed" : "Available";
 
-            card.innerHTML = `
-                <h3>${item.name}</h3>
-                <p><strong>Serial:</strong> ${item.serialNumber}</p>
-                <p>
-                    <strong>Status:</strong> 
-                    <span style="color:${item.condition === "Available" ? "green" : "red"}">
-                        ${item.condition}
-                    </span>
-                </p>
-
-                <button onclick="toggleStatus('${id}', '${item.condition}')">
-                    ${item.condition === "Available" ? "Borrow" : "Return"}
-                </button>
-
-                <button onclick="deleteEquipment('${id}')">
-                    Delete
-                </button>
+            const row = `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.serialNumber}</td>
+                    <td>
+                        <span class="status ${statusClass}">
+                            ${statusText}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn-action" onclick="deleteEquipment('${id}')" title="Delete equipment">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
             `;
 
-            container.appendChild(card);
-        }
+            tableBody.innerHTML += row;
+        });
     });
 }
 
+document.getElementById("addEquipmentBtn").addEventListener("click", async () => {
 
-// ==========================
-// BORROW / RETURN
-// ==========================
-window.toggleStatus = function (id, currentStatus) {
-    const itemRef = ref(db, `equipment/${id}`);
+    const name = prompt("Enter equipment name:");
+    const serial = prompt("Enter serial number:");
 
-    update(itemRef, {
-        condition: currentStatus === "Available" ? "Borrowed" : "Available"
-    });
+    if (!name || !serial) {
+        alert("Please fill all fields");
+        return;
+    }
 
-    showMessage("Status updated!");
-};
+    try {
+        await equipmentRef.push({
+            name: name,
+            serialNumber: serial,
+            status: "Available"
+        });
 
+        alert("Equipment added successfully");
 
-
-window.deleteEquipment = function (id) {
-    const itemRef = ref(db, `equipment/${id}`);
-
-    remove(itemRef);
-
-    showMessage("Deleted successfully", "#dc3545");
-};
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("equipmentForm");
-
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const name = document.getElementById("name").value;
-        const serial = document.getElementById("serialNumber").value;
-
-        addEquipment(name, serial);
-
-        form.reset();
-    });
-
-    renderEquipment();
+    } catch (error) {
+        console.error(error);
+        alert("Failed to add equipment");
+    }
 });
+window.deleteEquipment = async function (id) {
+
+    if (!confirm("Delete this equipment?")) return;
+
+    try {
+        await equipmentRef.child(id).remove();
+        alert("Equipment deleted successfully");
+
+    } catch (error) {
+        console.error(error);
+        alert("Failed to delete equipment");
+    }
+};
+
+loadEquipment();

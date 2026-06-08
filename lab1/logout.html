@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .logout-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .logout-message {
+            text-align: center;
+            color: #00d4a6;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #1e2a2f;
+            border-top: 4px solid #00d4a6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <div class="spinner"></div>
+        <div class="logout-message">Logging out...</div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-auth-compat.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/logout.js"></script>
+</body>
+</html>

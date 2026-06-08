@@ -1,4 +1,4 @@
-// Import Firebase modules
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyAK2F_3IW8jhVKm922mgxC29iTtUnHuhQU",
   authDomain: "lab1-26acb.firebaseapp.com",
@@ -9,9 +9,8 @@ const firebaseConfig = {
   appId: "1:966964967281:web:ded132e5ea00d7c6f4a8d0",
   measurementId: "G-NLDNFEND2W"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
-
-console.log('connected to firebase');
+console.log("Firebase initialized ✔");

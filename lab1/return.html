@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Equipment</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="dashboard-logo">
+    <img src="images2/kelly.png" alt="logo">
+</div>
+
+<ul class="nav">
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="borrow.html">Borrow</a></li>
+    <li><a href="return.html">Return</a></li>
+    <li><a href="logout.html">Logout</a></li>
+</ul>
+
+<div class="borrow-container">
+    <h2>Return Equipment</h2>
+
+    <form id="returnForm">
+        <div class="form-group">
+            <label>Admission Number</label>
+            <input type="text" id="admissionNo" placeholder="Enter admission number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Serial Number</label>
+            <input type="text" id="serialNo" placeholder="Enter equipment serial number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Return Date</label>
+            <input type="date" id="returnDate" required>
+        </div>
+
+        <div class="form-group">
+            <label>Condition (Optional)</label>
+            <select id="condition">
+                <option value="">Select condition</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Damaged">Damaged</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Notes (Optional)</label>
+            <textarea id="notes" placeholder="Any notes about the equipment return" rows="3"></textarea>
+        </div>
+
+        <button type="submit" id="returnBtn">Return Equipment</button>
+    </form>
+
+    <div id="returnMessage" class="message"></div>
+</div>
+
+<h2 class="page-title">Return History</h2>
+<div class="return-history">
+    <table class="return-table">
+        <thead>
+            <tr>
+                <th>Admission No</th>
+                <th>Equipment</th>
+                <th>Serial Number</th>
+                <th>Return Date</th>
+                <th>Condition</th>
+            </tr>
+        </thead>
+        <tbody id="returnTableBody">
+        </tbody>
+    </table>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-database-compat.js"></script>
+<script src="js/config.js"></script>
+<script src="js/return.js"></script>
+
+</body>
+</html>

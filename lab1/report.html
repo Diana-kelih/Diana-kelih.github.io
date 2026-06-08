@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowing Report</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="dashboard-logo">
+    <img src="images2/kelly.png" alt="logo">
+</div>
+
+<ul class="nav">
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="borrow.html">Borrow</a></li>
+    <li><a href="return.html">Return</a></li>
+    <li><a href="report.html">Report</a></li>
+    <li><a href="logout.html">Logout</a></li>
+</ul>
+
+<h2 class="page-title">Borrowing Report</h2>
+
+<div class="report-filters">
+    <div class="filter-group">
+        <label>Filter by Status:</label>
+        <select id="statusFilter">
+            <option value="">All Records</option>
+            <option value="borrowed">Currently Borrowed</option>
+            <option value="returned">Returned</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Search Admission No:</label>
+        <input type="text" id="admissionFilter" placeholder="Enter admission number">
+    </div>
+
+    <button id="exportBtn" class="btn-export">Export to CSV</button>
+</div>
+
+<div class="report-container">
+    <table class="report-table">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Admission No</th>
+                <th>Equipment Name</th>
+                <th>Serial Number</th>
+                <th>Course</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+                <th>Condition</th>
+            </tr>
+        </thead>
+        <tbody id="reportTableBody">
+        </tbody>
+    </table>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-database-compat.js"></script>
+<script src="js/config.js"></script>
+<script src="js/report.js"></script>
+
+</body>
+</html>
