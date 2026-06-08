@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="dashboard-logo">
+<img src="images2/kelly.png" alt="logo" >
+</div>
+<ul class="nav">
+  <li><a href="dashboard.html">Dashboard</a></li>
+  <li><a href="equipment.html">Equipment</a></li>
+  <li><a href="borrow.html">Borrow</a></li>
+  <li><a href="return.html">Return</a></li>
+  <li><a href="report.html">Report</a></li>
+  <li><a href="logout.html">Logout</a></li>
+</ul>
+
+<h2>COD Admin Panel - User Roles</h2>
+
+<table border="1" width="80%" align="center">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody id="usersTable">
+  </tbody>
+</table>
+
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-database-compat.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>

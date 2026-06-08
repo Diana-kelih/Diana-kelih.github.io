@@ -170,18 +170,23 @@ footer {
 }
  .dashboard-logo {
     background: #00d4a6;
-    padding: 12px 20px;
+     padding: 10px 20px;
     display: flex;
-    align-items: center;
+    align-items: left;
+    height: auto;
+     justify-content: flex-start;
+     margin-bottom: 20px;
 }
 .dashboard-logo img {
-    height: 50px;
+    height: 70px;
     width: auto;
+     border-radius: 50%;
+      margin-right: 2px;
 }
 .nav {
     list-style: none;
     display: flex;
-    gap: 18px;
+    gap: 10px;
     margin: 0;
     padding: 12px 20px;
     background:  #00d4a6;
@@ -505,4 +510,78 @@ footer {
 
 .report-table tr:last-child td {
     border-bottom: none;
+}
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #00d4a6;
+}
+.nav {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 12px 20px;
+    background:  #00d4a6;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.nav li a {
+    color: #333;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.nav li a:hover {
+    background: #00d4a6;
+    color: #000;
+}
+table {
+    border-collapse: collapse;
+    width: 85%;
+    margin: 30px auto;
+    background: #151a22;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+th {
+    background: #00d4a6;
+    color: #000;
+    padding: 15px;
+    text-align: left;
+}
+td {
+    padding: 14px;
+    border-bottom: 1px solid #222;
+    color: #ddd;
+}
+tr:hover {
+    background: #1c2230;
+}
+button {
+    padding: 8px 12px;
+    margin: 3px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s;
+}
+button:nth-child(1) {
+    background: #1c2230;
+    color: #fff;
+}
+button:nth-child(2) {
+    background:#00d4a6;
+    color: white;
+}
+button:nth-child(3) {
+    background: #00d4a6;
+    color: #fff;
+}
+button:hover {
+    opacity: 0.8;
 }

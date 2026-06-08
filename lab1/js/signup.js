@@ -43,11 +43,15 @@ if (signupForm) {
             submitBtn.textContent = "Sign Up";
             return;
         }
-
-        // Create user
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+            firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                // SUCCESS → redirect to login page
+                const user = userCredential.user;
+                firebase.database().ref("users/" + user.uid).set({
+                    email: email,
+                    role: "student",
+                    createdAt: Date.now()
+                });
+        
                 console.log("Account created:", userCredential.user.email);
                 showMessage("Account created successfully! Redirecting to sign in...", "success");
                 setTimeout(() => {
