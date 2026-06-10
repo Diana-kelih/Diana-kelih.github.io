@@ -10,7 +10,6 @@ const firebaseConfig = {
   measurementId: "G-NLDNFEND2W"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 console.log("Firebase initialized ✔");

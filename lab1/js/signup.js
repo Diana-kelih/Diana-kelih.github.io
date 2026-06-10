@@ -43,8 +43,12 @@ if (signupForm) {
             submitBtn.textContent = "Sign Up";
             return;
         }
+
+        // Create user
+        firebase.auth().createUserWithEmailAndPassword(email, password)
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
+                // SUCCESS → redirect to login page
                 const user = userCredential.user;
                 firebase.database().ref("users/" + user.uid).set({
                     email: email,
@@ -66,5 +70,5 @@ if (signupForm) {
             });
     });
 } else {
-    console.error("signupForm element not found!");
-}
+    console.error("signupForm element not found!")
+};

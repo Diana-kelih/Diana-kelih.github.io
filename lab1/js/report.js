@@ -1,4 +1,14 @@
-// Get elements
+firebase.auth().onAuthStateChanged((user) => {
+    if (!user) { window.location.replace("signin.html"); return; }
+    
+    firebase.database().ref("Users/" + user.uid).once("value").then((snapshot) => {
+        const role = snapshot.val() && snapshot.val().role ? snapshot.val().role.toLowerCase() : "student";
+        if (role === "student") {
+            alert("Access Denied! Students cannot view system reports.");
+            window.location.replace("Dashboard.html");
+        }
+    });
+});
 const reportTableBody = document.getElementById("reportTableBody");
 const statusFilter = document.getElementById("statusFilter");
 const admissionFilter = document.getElementById("admissionFilter");
